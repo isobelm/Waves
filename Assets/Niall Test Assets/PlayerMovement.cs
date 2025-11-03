@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     public float sandSpeed = 2f;
 
     private float currentSpeed;
-    // private bool isInWater = false;
 
     void Start()
     {
@@ -25,8 +25,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Water"))
         {
-            // isInWater = true;
             currentSpeed = waterSpeed;
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            Die();
         }
     }
 
@@ -34,8 +38,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Water"))
         {
-            // isInWater = false;
             currentSpeed = sandSpeed;
         }
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
