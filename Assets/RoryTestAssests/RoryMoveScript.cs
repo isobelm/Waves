@@ -3,17 +3,21 @@ using UnityEngine;
 public class RoryMoveScript : MonoBehaviour
 {
     public float moveSpeed;
-    public static float START_POSITION_X = 0;
-    public static float START_POSITION_Y = 0;
+    public static float START_POSITION_X = 0f;
+    public static float START_POSITION_Y = 0f;
+    public static float SAND_SPEED = 2f;
+    public static float POOL_SPEED = 5f;
+    public static float SEA_SPEED = 0.5f;
     public OnCollisionCrab onCollisionCrab;
     bool resetCrab;
 
     void Start()
     {
-        moveSpeed = 10;
+        moveSpeed = SAND_SPEED;
         //transform.Translate(new Vector2(START_POSITION_X, START_POSITION_Y));
         transform.localPosition = new Vector2(0, 0);
         resetCrab = false;
+        
     }
 
     void Update()
@@ -39,7 +43,7 @@ public class RoryMoveScript : MonoBehaviour
         {
             transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
         }
-
+        Debug.Log("move speed: " + moveSpeed);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -49,12 +53,25 @@ public class RoryMoveScript : MonoBehaviour
             resetCrab = true;
         }
     }
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
             resetCrab = true;
         }
+        if (other.CompareTag("TidePool"))
+        {
+            moveSpeed = 5f;
+        } else if (other.CompareTag("Sea"))
+        {
+            moveSpeed = 0.5f;
+        } else 
+        // if (other.CompareTag("Sand"))
+        {
+            moveSpeed = 2f;
+        }
+        
     }
+
 }

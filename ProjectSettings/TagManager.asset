@@ -7,6 +7,9 @@ TagManager:
   - Terrain
   - Water
   - Enemy
+  - TidePool
+  - Sand
+  - Sea
   layers:
   - Default
   - TransparentFX
