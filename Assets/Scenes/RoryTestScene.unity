@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &143228708 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7548144617848388731, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
-  m_PrefabInstance: {fileID: 537396229}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &264633385
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +330,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9180244866627137890, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
+      propertyPath: maxXSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9180244866627137890, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 2079304897}
@@ -357,14 +356,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7548144617848388731, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
-      insertIndex: 0
+    - targetCorrespondingSourceObject: {fileID: 683478888708683012, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1646084857}
-    - targetCorrespondingSourceObject: {fileID: 7548144617848388731, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 683478888708683012, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2079304896}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
+--- !u!4 &537396230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 683478888708683012, guid: d33718a6bbe1b554e94aaceab386941c, type: 3}
+  m_PrefabInstance: {fileID: 537396229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &563288299
 GameObject:
   m_ObjectHideFlags: 0
@@ -34448,7 +34452,7 @@ Transform:
   m_LocalScale: {x: -0.57283664, y: 18.670658, z: 21.949438}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 143228708}
+  m_Father: {fileID: 537396230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1646084858
 MonoBehaviour:
@@ -34635,7 +34639,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 143228708}
+  m_Father: {fileID: 537396230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2079304897
 BoxCollider2D:
