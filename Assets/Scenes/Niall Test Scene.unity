@@ -129,13 +129,15 @@ GameObject:
   m_Component:
   - component: {fileID: 27700528}
   - component: {fileID: 27700527}
-  - component: {fileID: 27700526}
   - component: {fileID: 27700525}
   - component: {fileID: 27700524}
+  - component: {fileID: 27700532}
+  - component: {fileID: 27700531}
+  - component: {fileID: 27700530}
   - component: {fileID: 27700529}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,7 +172,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -203,7 +205,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27700523}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -221,23 +223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &27700526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27700523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf86764b64652b41b6c3efe1b6e9835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterSpeed: 5
-  sandSpeed: 2
-  timeBeforeSeagullDeath: 3
-  timerText: {fileID: 2015394601}
+  m_Constraints: 4
 --- !u!212 &27700527
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,7 +291,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 774086495}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &27700529
@@ -317,11 +304,130 @@ MonoBehaviour:
   m_GameObject: {fileID: 27700523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17bcfad8d91ccf8b481729d46de58fbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fe11cdde7b97946791e6112b6598847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seagullPrefab: {fileID: 4517891412426203163, guid: 32e8f0f5eed111b9884ad3395ba77b88, type: 3}
-  warningTime: 2
+  timeBeforeDeath: 3
+  dangerThreshold: 1
+  OnTimerTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2015394603}
+        m_TargetAssemblyTypeName: TimerDisplay, Assembly-CSharp
+        m_MethodName: UpdateDisplay
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDangerStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 774086494}
+        m_TargetAssemblyTypeName: SeagullSpawner, Assembly-CSharp
+        m_MethodName: ShowSeagull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDangerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 774086494}
+        m_TargetAssemblyTypeName: SeagullSpawner, Assembly-CSharp
+        m_MethodName: HideSeagull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnTimeout:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &27700530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27700523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9653ace404d5b1f9e8b0cd8baeee99b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterSpeed: 5
+  sandSpeed: 2
+--- !u!114 &27700531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27700523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1257d419c368fc37b92c250cc7ad0b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnterWater:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2015394603}
+        m_TargetAssemblyTypeName: TimerDisplay, Assembly-CSharp
+        m_MethodName: ShowSafeMessage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExitWater:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &27700532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27700523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa0f07f2200a54fbad59ce0e8547356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1738233842}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &121010387
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,12 +763,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 451293341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d34a36ca99dd7f780d1bd7926f77d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c429aead5b63dde8af67d0302120fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 27700528}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: -10}
+  player: {fileID: 27700528}
+--- !u!1 &774086493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774086495}
+  - component: {fileID: 774086494}
+  m_Layer: 0
+  m_Name: Seagull Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &774086494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774086493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51289a0674945a3998af612f5e39451f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seagullPrefab: {fileID: 4517891412426203163, guid: 32e8f0f5eed111b9884ad3395ba77b88, type: 3}
+  spawnOffset: {x: 3, y: 5, z: 0}
+  approachSpeed: 5
+  targetOffset: {x: 0, y: 2, z: 0}
+--- !u!4 &774086495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774086493}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.63605183, y: 2.267116, z: 1.9767997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 27700528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &817897526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1182,7 @@ GameObject:
   - component: {fileID: 1376573114}
   - component: {fileID: 1376573113}
   - component: {fileID: 1376573112}
-  - component: {fileID: 1376573111}
+  - component: {fileID: 1376573116}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1036,21 +1190,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1376573111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376573110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85a583d9fc608a3b6a98a220db841c36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterSpeed: 2
-  sandSpeed: 1
-  patrolDistance: 5
 --- !u!58 &1376573112
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1081,7 +1220,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1095,7 +1234,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376573110}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1113,7 +1252,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1376573114
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1184,6 +1323,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376573116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376573110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b17f07af70ccf5198b3a0038d6f7fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  OnEnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  diveSpeed: 2
+  targetPosition: {x: 0, y: 0, z: 0}
+--- !u!1 &1738233839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738233841}
+  - component: {fileID: 1738233842}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1738233841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738233839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.0538578, y: 2.106986, z: -3.98223}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738233842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738233839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3ad7c8d3e7984d9b5d0edc180c7dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1745309130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,6 +3936,59 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1888597394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888597396}
+  - component: {fileID: 1888597395}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1888597395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888597394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3fa803631012348994ae884549a32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveFrequency: 5
+  waveForce: 10
+  waveAffectRange: 5
+  OnWaveStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWaveEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &1888597396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888597394}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.63605183, y: 1.127116, z: 1.9767997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015394599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,8 +4000,9 @@ GameObject:
   - component: {fileID: 2015394600}
   - component: {fileID: 2015394602}
   - component: {fileID: 2015394601}
+  - component: {fileID: 2015394603}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3769,7 +4024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296, y: -530.5}
+  m_AnchoredPosition: {x: 137, y: -60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2015394601
@@ -3871,6 +4126,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015394599}
   m_CullTransparentMesh: 1
+--- !u!114 &2015394603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015394599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74cb672f5a5016a0afd473f80a66390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 2015394601}
+  timerFormat: 'Out of water: {0:F1}s / {1:F1}s'
+  safeText: In water - safe!
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  dangerColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3882,3 +4154,5 @@ SceneRoots:
   - {fileID: 1376573115}
   - {fileID: 1291707518}
   - {fileID: 921965999}
+  - {fileID: 1738233841}
+  - {fileID: 1888597396}
