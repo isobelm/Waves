@@ -18,6 +18,16 @@ public class PlayerMovement : MonoBehaviour
 
     private float timeOutOfWater = 0f;
 
+    public float GetTimeOutOfWater()
+    {
+        return timeOutOfWater;
+    }
+
+    public bool IsInWater()
+    {
+        return isInWater;
+    }
+
     void Start()
     {
         currentSpeed = sandSpeed;
