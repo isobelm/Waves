@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float waterSpeed = 5f;
     public float sandSpeed = 2f;
-    public float timeBeforeSeagullDeath = 3f;
+    public float timeBeforeSeagullDeath = 6f;
 
     public TextMeshProUGUI timerText;
 
@@ -68,24 +67,24 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Water"))
-        {
-            isInWater = true;
-            currentSpeed = waterSpeed;
-        }
-
         if (other.CompareTag("Enemy"))
         {
             Die("Red circles hurt");
+        }
+
+        if (other.CompareTag("Sand"))
+        {
+            isInWater = false;
+            currentSpeed = sandSpeed;
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Water"))
+        if (other.CompareTag("Sand"))
         {
-            isInWater = false;
-            currentSpeed = sandSpeed;
+            isInWater = true;
+            currentSpeed = waterSpeed;
         }
     }
 
