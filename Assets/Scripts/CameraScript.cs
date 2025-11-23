@@ -6,8 +6,8 @@ public class CameraScript : MonoBehaviour
     public float smoothSpeed = 0.125f;
     public Vector3 offset = new(0, 0, -10);
     
-    public float minX = -10f;
-    public float maxX = 10f;
+    public float minX = 0f;
+    public float maxX = 31f;
     
     public float fixedY = 0f;
     
