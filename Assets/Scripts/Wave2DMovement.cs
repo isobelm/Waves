@@ -67,7 +67,7 @@ public class Wave2DMovement : MonoBehaviour
         //     Debug.Log("TIMES UP");
         // }
 
-        Debug.Log("targetTime: " + targetTime);
+        // Debug.Log("targetTime: " + targetTime);
     }
 
     void UpdateTime()
