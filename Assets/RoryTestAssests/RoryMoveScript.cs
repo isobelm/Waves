@@ -3,11 +3,11 @@ using UnityEngine;
 public class RoryMoveScript : MonoBehaviour
 {
     public float moveSpeed;
-    public static float START_POSITION_X = 0f;
-    public static float START_POSITION_Y = 0f;
-    public static float SAND_SPEED = 2f;
-    public static float POOL_SPEED = 5f;
-    public static float SEA_SPEED = 0.5f;
+    public static float START_POSITION_X = -7f;
+    public static float START_POSITION_Y = -2f;
+    public static float SAND_SPEED = 5f;
+    public static float POOL_SPEED = 10f;
+    public static float SEA_SPEED = 1f;
     public OnCollisionCrab onCollisionCrab;
     bool resetCrab;
 
@@ -62,16 +62,20 @@ public class RoryMoveScript : MonoBehaviour
         }
         if (other.CompareTag("TidePool"))
         {
-            moveSpeed = 5f;
-        } else if (other.CompareTag("Sea"))
-        {
-            moveSpeed = 0.5f;
-        } else 
-        // if (other.CompareTag("Sand"))
-        {
-            moveSpeed = 2f;
+            moveSpeed = POOL_SPEED;
         }
-        
+        if (other.CompareTag("Sea"))
+        {
+            moveSpeed = SEA_SPEED;
+        }
+    }
+    
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("TidePool") || other.CompareTag("Sea"))
+        {
+            moveSpeed = SAND_SPEED;
+        }
     }
 
 }
