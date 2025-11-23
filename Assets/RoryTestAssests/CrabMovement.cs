@@ -12,7 +12,7 @@ public class CrabMovement : MonoBehaviour
     public Rigidbody2D body;
 
     public float START_POSITION_X;
-    public float START_POSITION_Y; 
+    public float START_POSITION_Y;
 
     private float xInput;
     private float yInput;
@@ -31,7 +31,7 @@ public class CrabMovement : MonoBehaviour
     private bool isMoving;
 
     public TextMeshProUGUI textOutput;
-    
+
     void Start()
     {
         ResetPosition();
@@ -81,7 +81,7 @@ public class CrabMovement : MonoBehaviour
         yInput = Input.GetAxis("Vertical");
     }
 
-      void FaceInput()
+    void FaceInput()
     {
         float direction = Mathf.Sign(xInput);
         transform.localScale = new Vector3(direction, 1, 1);
@@ -92,7 +92,8 @@ public class CrabMovement : MonoBehaviour
         if (inPoolLayer)
         {
             playerSpeed = POOL_SPEED;
-        } else
+        }
+        else
         {
             playerSpeed = ROCK_SPEED;
         }
@@ -110,7 +111,8 @@ public class CrabMovement : MonoBehaviour
 
             FaceInput();
             crabAnimator.SetBool("isMoving", true);
-        } else
+        }
+        else
         {
             crabAnimator.SetBool("isMoving", false);
         }
@@ -123,7 +125,7 @@ public class CrabMovement : MonoBehaviour
     }
 
 
- //----------------------------------------------------------------------------
+    //----------------------------------------------------------------------------
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -134,7 +136,7 @@ public class CrabMovement : MonoBehaviour
         else if (other.CompareTag("TidePool"))
         {
             playerSpeed = POOL_SPEED;
-            
+
         }
         else if (other.CompareTag("Sea"))
         {
