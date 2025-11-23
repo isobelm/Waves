@@ -8,8 +8,8 @@ TagManager:
   - Water
   - Enemy
   - TidePool
-  - Sand
   - Sea
+  - Rock
   layers:
   - Default
   - TransparentFX
@@ -47,14 +47,14 @@ TagManager:
   - name: Bottom of pool
     uniqueID: 2645691191
     locked: 0
+  - name: Wave
+    uniqueID: 1293689045
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Crab
     uniqueID: 3959024343
-    locked: 0
-  - name: Wave
-    uniqueID: 1293689045
     locked: 0
   - name: Seagull
     uniqueID: 2352091163

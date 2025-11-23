@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CrabMovement : MonoBehaviour
@@ -23,12 +26,19 @@ public class CrabMovement : MonoBehaviour
     public LayerMask poolMask;
     private bool inPoolLayer;
     private BoxCollider2D poolCheck;
+
+    public Animator crabAnimator;
+    private bool isMoving;
+
+    public TextMeshProUGUI textOutput;
     
     void Start()
     {
         ResetPosition();
 
         playerSpeed = ROCK_SPEED;
+
+        isMoving = crabAnimator.GetBool("isMoving");
     }
 
     void Update()
@@ -36,11 +46,25 @@ public class CrabMovement : MonoBehaviour
         CheckInput();
         // UpdatePlayerSpeed();
         HandleMovement();
+
+        isMoving = crabAnimator.GetBool("isMoving");
+
+        Debug();
     }
 
     void FixedUpdate()
     {
         // CheckLayer();
+    }
+
+    void Debug()
+    {
+        String debugOutput = "";
+
+        debugOutput += "isMoving: " + isMoving + "\r\n";
+        debugOutput += "playerSpeed: " + playerSpeed + "\r\n";
+
+        textOutput.text = debugOutput;
     }
 
     //----------------------------------------------------------------------------
@@ -68,11 +92,9 @@ public class CrabMovement : MonoBehaviour
         if (inPoolLayer)
         {
             playerSpeed = POOL_SPEED;
-            Debug.Log("POOL LAYER");
         } else
         {
             playerSpeed = ROCK_SPEED;
-            Debug.Log("OTHER LAYER");
         }
     }
 
@@ -81,20 +103,27 @@ public class CrabMovement : MonoBehaviour
         float xSpeed = playerSpeed * xInput;
         float ySpeed = playerSpeed * yInput;
 
-        if (Mathf.Abs(xInput) > 0)
+        if (Mathf.Abs(xInput) > 0 || Mathf.Abs(yInput) > 0)
         {
             body.linearVelocity = new Vector2(xSpeed, ySpeed);
             // transform.position += new Vector3(xInput, yInput, 0) * playerSpeed * Time.deltaTime;
 
             FaceInput();
+            crabAnimator.SetBool("isMoving", true);
+        } else
+        {
+            crabAnimator.SetBool("isMoving", false);
         }
     }
 
     void CheckLayer()
     {
         // inPoolLayer = Physics2D.OverlapAreaAll(poolCheck.bounds.min, poolCheck.bounds.max, poolMask).Length > 0;
-        Debug.Log("isPoolLayer: " + inPoolLayer);
+        UnityEngine.Debug.Log("isPoolLayer: " + inPoolLayer);
     }
+
+
+ //----------------------------------------------------------------------------
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -115,11 +144,9 @@ public class CrabMovement : MonoBehaviour
         {
             playerSpeed = ROCK_SPEED;
         }
-
-        Debug.Log("ENTER: playerSpeed: " + playerSpeed);
     }
 
-     void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("TidePool"))
         {
@@ -129,7 +156,5 @@ public class CrabMovement : MonoBehaviour
         {
             playerSpeed = ROCK_SPEED;
         }
-
-        Debug.Log("EXIT: playerSpeed: " + playerSpeed);
     }
 }
