@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class Player2DMovement : MonoBehaviour
@@ -27,16 +28,12 @@ public class Player2DMovement : MonoBehaviour
         ResetPosition();
 
         currentSpeed = ROCK_SPEED;
-
-        isMoving = crabAnimator.GetBool("isMoving");
     }
 
     void Update()
     {
         CheckInput();
         HandleMovement();
-
-        isMoving = crabAnimator.GetBool("isMoving");
     }
 
     void FixedUpdate()
@@ -68,7 +65,6 @@ public class Player2DMovement : MonoBehaviour
     {
         Vector2 movement = new Vector2(xInput, yInput) * currentSpeed;
         body.linearVelocity = movement;
-
 
         // float xSpeed = currentSpeed * xInput;
         // float ySpeed = currentSpeed * yInput;
