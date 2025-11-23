@@ -17,6 +17,7 @@ public class TilemapGenerator : MonoBehaviour
         InitialiseTilePicker();
         bounds = inputMap.localBounds;
         GenerateTilemap();
+        inputMap.gameObject.GetComponentInChildren<TilemapRenderer>().enabled = false;
     }
 
     void InitialiseTilePicker()
