@@ -96,7 +96,7 @@ public class Player2DMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            ResetPosition();
+            gameStateController.PlayerDied();
         }
         else if (other.CompareTag("TidePool"))
         {
