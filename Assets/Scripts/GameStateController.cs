@@ -51,4 +51,14 @@ public class GameStateController : MonoBehaviour
             }
         }
     }
+
+    public void PlayerDied()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void PlayerWon()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
