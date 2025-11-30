@@ -1,14 +1,21 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    public enum SceneName
+    {
+        MAIN_MENU,
+        LEVEL_ONE
+    }
+
     [SerializeField] private Sound[] musicSounds, audioSounds;
     [SerializeField] private AudioSource musicAudioSource, soundEffectSource;
+    [SerializeField] private SceneName sceneName;
+
     
     private void Awake()
     {
@@ -27,6 +34,7 @@ public class AudioManager : MonoBehaviour
     {
         Sound sound = Array.Find(musicSounds, x => x.name == name);
 
+        musicAudioSource.Stop();
         musicAudioSource.loop = true;
         musicAudioSource.clip = sound.audioClip;
         musicAudioSource.Play();
@@ -34,12 +42,11 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == "MainMenu")
+        if (sceneName == SceneName.MAIN_MENU)
         {
             PlayMusic(Sound.AudioName.MAIN_MENU_MUSIC);
         }
-        else
+        else if ( sceneName == SceneName.LEVEL_ONE)
         {
             PlayMusic(Sound.AudioName.LEVEL_ONE_MUSIC);
         }
