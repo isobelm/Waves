@@ -9,10 +9,13 @@ public class AudioManager : MonoBehaviour
     public enum SceneName
     {
         MAIN_MENU,
-        LEVEL_ONE
+        LEVEL_ONE,
+        WIN,
+        DEAD
     }
 
-    [SerializeField] private Sound[] musicSounds, audioSounds;
+    [SerializeField] private MusicSound[] musicSounds;
+    [SerializeField] private SoundEffectSound[] soundEffectSounds;
     [SerializeField] private AudioSource musicAudioSource, soundEffectSource;
     [SerializeField] private SceneName sceneName;
 
@@ -30,9 +33,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(Sound.AudioName name)
+    public void PlayMusic(MusicSound.MusicName name)
     {
-        Sound sound = Array.Find(musicSounds, x => x.name == name);
+        MusicSound sound = Array.Find(musicSounds, x => x.name == name);
 
         musicAudioSource.Stop();
         musicAudioSource.loop = true;
@@ -40,15 +43,20 @@ public class AudioManager : MonoBehaviour
         musicAudioSource.Play();
     }
 
+    public void PlaySound(SoundEffectSound.SoundName name)
+    {
+        SoundEffectSound sound = Array.Find(soundEffectSounds, x => x.name == name);
+
+        soundEffectSource.PlayOneShot(sound.audioClip);
+    }
+
+    public void StopMusic()
+    {
+        musicAudioSource.Stop();
+    }
+
     private void Start()
     {
-        if (sceneName == SceneName.MAIN_MENU)
-        {
-            PlayMusic(Sound.AudioName.MAIN_MENU_MUSIC);
-        }
-        else if ( sceneName == SceneName.LEVEL_ONE)
-        {
-            PlayMusic(Sound.AudioName.LEVEL_ONE_MUSIC);
-        }
+        PlayMusic(MusicSound.MusicName.MAIN_MENU_MUSIC);
     }
 }
