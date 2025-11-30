@@ -18,15 +18,19 @@ public class Wave2DMovement : MonoBehaviour
 
     float startY;
 
-    float TIMER_LENGTH = 3f;
+    float TIMER_LENGTH = 0f;
     float targetTime;
     bool isWaveReady = false;
     bool isWaveAttack = false;
     int waveState = 0;
 
+    public float waveSpeed = 0f;
+    private float prevY;
+
     void Start()
     {
         startY = transform.localPosition.y;
+        prevY = startY;
         targetTime = TIMER_LENGTH;
     }
 
@@ -47,20 +51,20 @@ public class Wave2DMovement : MonoBehaviour
                 }
             case 2:
                 {
-                    WaveCycle(8);
+                    WaveCycle(7);
                     break;
                 }
-
         }
+
+        calculateWaveSpeed();
     }
 
     void UpdateTime()
     {
-        time += Time.deltaTime; //* ySpeed;
+        time += Time.deltaTime;
 
         if (time > 2 * Mathf.PI)
         {
-            // time -= 2 * Mathf.PI;
             nextState();
         }
     }
@@ -96,6 +100,12 @@ public class Wave2DMovement : MonoBehaviour
             nextState();
             targetTime = TIMER_LENGTH;
         }
+    }
+
+    void calculateWaveSpeed()
+    {
+        waveSpeed = -(prevY - transform.localPosition.y)/Time.deltaTime;
+        prevY = transform.localPosition.y;
     }
 
 }
