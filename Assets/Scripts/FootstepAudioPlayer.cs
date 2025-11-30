@@ -1,13 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(GameObject))]
+[RequireComponent(typeof(Player2DMovement))]
 public class FootstepAudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip[] footsteps;
     [SerializeField] private AudioSource footstepAudioSource;
-    [SerializeField] private GameObject player;
-
-    [SerializeField] private float footstepSpeed = 1;
+    [SerializeField] private float footstepSpeed = 1.25f;
 
     private Player2DMovement player2DMovement;
 
@@ -15,7 +13,7 @@ public class FootstepAudioPlayer : MonoBehaviour
 
     public void Start()
     {
-        player2DMovement = player.GetComponent<Player2DMovement>();
+        player2DMovement = GetComponent<Player2DMovement>();
     }
 
     public void Update()
