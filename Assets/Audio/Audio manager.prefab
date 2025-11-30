@@ -278,7 +278,11 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: b619e04104b942ced90500640833fc66, type: 3}
   - name: 1
     audioClip: {fileID: 8300000, guid: d74e9a37b252be28c83f1733146ff581, type: 3}
-  audioSounds: []
+  soundEffectSounds:
+  - name: 0
+    audioClip: {fileID: 8300000, guid: eecae924e664081a7bc315bda830e641, type: 3}
+  - name: 1
+    audioClip: {fileID: 8300000, guid: 3e460389ccf7308fca5a48f534cc2995, type: 3}
   musicAudioSource: {fileID: 5724952194797523179}
   soundEffectSource: {fileID: 6963756453873799213}
   sceneName: 0

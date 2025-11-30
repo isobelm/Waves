@@ -1,14 +1,14 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Sound
+public class MusicSound
 {
-    public enum AudioName
+    public enum MusicName
     {
         MAIN_MENU_MUSIC,
         LEVEL_ONE_MUSIC
     }
 
-    public AudioName name;
+    public MusicName name;
     public AudioClip audioClip;
 }
