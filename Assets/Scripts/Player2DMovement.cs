@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class Player2DMovement : MonoBehaviour
@@ -17,6 +16,7 @@ public class Player2DMovement : MonoBehaviour
     public float SEA_SPEED;
 
     private float currentSpeed;
+    private GameStateController gameStateController;
 
     public Animator crabAnimator;
     private bool isMoving;
@@ -24,6 +24,7 @@ public class Player2DMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        gameStateController = FindFirstObjectByType<GameStateController>();
 
         ResetPosition();
 
@@ -32,8 +33,11 @@ public class Player2DMovement : MonoBehaviour
 
     void Update()
     {
-        CheckInput();
-        HandleMovement();
+        if (!gameStateController.GetIsGamePaused())
+        {
+            CheckInput();
+            HandleMovement();
+        }
     }
 
     void FixedUpdate()
@@ -92,7 +96,7 @@ public class Player2DMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            ResetPosition();
+            gameStateController.PlayerDied();
         }
         else if (other.CompareTag("TidePool"))
         {
