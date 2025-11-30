@@ -107,6 +107,7 @@ public class Player2DMovement : MonoBehaviour
         else if (other.CompareTag("Sea"))
         {
             currentSpeed = SEA_SPEED;
+            Debug.Log("Entered Sea");
         }
         else
         {
@@ -125,6 +126,7 @@ public class Player2DMovement : MonoBehaviour
         else if (other.CompareTag("Sea"))
         {
             currentSpeed = ROCK_SPEED;
+            Debug.Log("Exited Sea");
         }
     }
 }
