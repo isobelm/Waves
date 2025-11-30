@@ -102,6 +102,8 @@ public class Player2DMovement : MonoBehaviour
 
         if(seaSpeed < 0){
             seaSpeed = seaSpeed/2;
+        } else {
+            seaSpeed = 2*seaSpeed/3;
         }
 
         if(inSea){

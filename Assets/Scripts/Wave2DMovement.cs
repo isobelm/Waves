@@ -18,7 +18,7 @@ public class Wave2DMovement : MonoBehaviour
 
     float startY;
 
-    float TIMER_LENGTH = 0f;
+    public float timerLength = 0f;
     float targetTime;
     bool isWaveReady = false;
     bool isWaveAttack = false;
@@ -31,7 +31,7 @@ public class Wave2DMovement : MonoBehaviour
     {
         startY = transform.localPosition.y;
         prevY = startY;
-        targetTime = TIMER_LENGTH;
+        targetTime = timerLength;
     }
 
     void Update()
@@ -98,7 +98,7 @@ public class Wave2DMovement : MonoBehaviour
         if (targetTime <= 0f)
         {
             nextState();
-            targetTime = TIMER_LENGTH;
+            targetTime = timerLength;
         }
     }
 
