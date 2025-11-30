@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player2DMovement : MonoBehaviour
 {
 
@@ -26,7 +26,7 @@ public class Player2DMovement : MonoBehaviour
     private bool isMoving;
     bool inSea = false;
 
-    private Vector2 seaMovement = new Vector2(0f, 0f);                                                      
+    private Vector2 seaMovement = new(0f, 0f);                                                      
 
     void Start()
     {
@@ -158,8 +158,13 @@ public class Player2DMovement : MonoBehaviour
         return currentSpeed;
     }
 
-    public Boolean GetIsMoving()
+    public bool GetIsMoving()
     {
         return isMoving;
+    }
+
+    public bool GetIsInSea()
+    {
+        return inSea;
     }
 }

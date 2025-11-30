@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f8f4e5b3ff11d31a57270384104b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footsteps:
+  sandFootsteps:
   - {fileID: 8300000, guid: 5d55af098c19211d292be22172c51ccc, type: 3}
   - {fileID: 8300000, guid: 79ce7de8450be0bc58331dcac12673a6, type: 3}
   - {fileID: 8300000, guid: 99885bb5baf1785e5875de0c64aeb111, type: 3}
@@ -421,5 +421,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d708ffdd3eac95149d2ed7c94a622a3, type: 3}
   - {fileID: 8300000, guid: b146bf52fdbc6e5dabae663edf4af3ac, type: 3}
   - {fileID: 8300000, guid: d1ada1432775147da9644a30f921b843, type: 3}
+  waterFootsteps:
+  - {fileID: 8300000, guid: 9a46d2b7fc3cc55cc98aa72c9fd859c3, type: 3}
+  - {fileID: 8300000, guid: eeead8c2b025cef02a727c816cb9da88, type: 3}
+  - {fileID: 8300000, guid: 3eea619c0c1c704a59e1ad583c6dd416, type: 3}
+  - {fileID: 8300000, guid: fbd005d1416c3c78f8a4cb2d515684dd, type: 3}
+  - {fileID: 8300000, guid: 6f6b8e0499b2289d49cec59e72c52a77, type: 3}
+  - {fileID: 8300000, guid: 32b08f276083eeab3895ad4bb186cf1d, type: 3}
+  - {fileID: 8300000, guid: 410cfe3676aea08a4aaa87ec08fb6fcf, type: 3}
+  - {fileID: 8300000, guid: a6f2401eff8b2ae158e16851ac9a5cc5, type: 3}
   footstepAudioSource: {fileID: 5734613252719658463}
-  footstepSpeed: 1
+  footstepSpeed: 1.25
