@@ -19,6 +19,7 @@ public class Player2DMovement : MonoBehaviour
     private GameStateController gameStateController;
 
     public Animator crabAnimator;
+    public SpriteRenderer spriteRenderer;
     private bool isMoving;
 
     void Start()
@@ -28,7 +29,7 @@ public class Player2DMovement : MonoBehaviour
 
         ResetPosition();
 
-        currentSpeed = ROCK_SPEED;
+        currentSpeed = POOL_SPEED;
     }
 
     void Update()
@@ -101,6 +102,7 @@ public class Player2DMovement : MonoBehaviour
         else if (other.CompareTag("Rock"))
         {
             currentSpeed = ROCK_SPEED;
+            spriteRenderer.sortingLayerID = SortingLayer.NameToID("Crab");
         }
         else if (other.CompareTag("Sea"))
         {
@@ -109,6 +111,7 @@ public class Player2DMovement : MonoBehaviour
         else
         {
             currentSpeed = POOL_SPEED;
+            spriteRenderer.sortingLayerID = SortingLayer.NameToID("Bottom of pool");
         }
     }
 
@@ -117,6 +120,7 @@ public class Player2DMovement : MonoBehaviour
         if (other.CompareTag("Rock"))
         {
             currentSpeed = POOL_SPEED;
+            spriteRenderer.sortingLayerID = SortingLayer.NameToID("Bottom of pool");
         }
         else if (other.CompareTag("Sea"))
         {
