@@ -32,15 +32,6 @@ public class Wave2DMovement : MonoBehaviour
 
     void Update()
     {
-
-        // if (!isWaveReady)
-        // {
-        //     WaveIdle();
-        // }
-        // else
-        // {
-        //     WaveCycle(1);
-        // }
         switch (waveState)
         {
             default:
@@ -61,13 +52,6 @@ public class Wave2DMovement : MonoBehaviour
                 }
 
         }
-        // else
-        // {
-        //     WaveAttack();
-        //     Debug.Log("TIMES UP");
-        // }
-
-        // Debug.Log("targetTime: " + targetTime);
     }
 
     void UpdateTime()
@@ -84,7 +68,7 @@ public class Wave2DMovement : MonoBehaviour
     void WaveIdle()
     {
         Timer();
-        transform.localPosition = new Vector2(body.position.x, startY);
+        transform.localPosition = new Vector2(transform.localPosition.x, startY);
     }
 
     void WaveCycle(float amplitude)
@@ -94,7 +78,7 @@ public class Wave2DMovement : MonoBehaviour
         //+1 to change range from [-1,1] to [0,2] 
         float yPos = (Mathf.Cos(time + Mathf.PI) + 1) * -1;
 
-        transform.localPosition = new Vector2(body.position.x, yPos * amplitude + startY);
+        transform.localPosition = new Vector2(transform.localPosition.x, yPos * amplitude + startY);
     }
 
     void nextState()
@@ -109,7 +93,6 @@ public class Wave2DMovement : MonoBehaviour
 
         if (targetTime <= 0f)
         {
-            // isWaveReady = !isWaveReady;
             nextState();
             targetTime = TIMER_LENGTH;
         }

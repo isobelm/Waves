@@ -20,27 +20,17 @@ public class WaveMovement : MonoBehaviour
 
     float TIMER_LENGTH = 2 * Mathf.PI;
     float targetTime;
-    bool isWaveReady = false;
-    bool isWaveAttack = false;
     int waveState = 0;
 
     void Start()
     {
-        startY = transform.localPosition.y;
+        // startY = transform.localPosition.y;
         targetTime = TIMER_LENGTH;
     }
 
     void Update()
     {
-
-        // if (!isWaveReady)
-        // {
-        //     WaveIdle();
-        // }
-        // else
-        // {
-        //     WaveCycle(1);
-        // }
+        Debug.Log("test: ");
         switch (waveState)
         {
             default:
@@ -61,11 +51,6 @@ public class WaveMovement : MonoBehaviour
                 }
 
         }
-        // else
-        // {
-        //     WaveAttack();
-        //     Debug.Log("TIMES UP");
-        // }
 
         Debug.Log("targetTime: " + targetTime);
     }
@@ -84,7 +69,7 @@ public class WaveMovement : MonoBehaviour
     void WaveIdle()
     {
         Timer();
-        transform.localPosition = new Vector2(body.position.x, startY);
+        // transform.localPosition = new Vector2(body.position.x, startY);
     }
 
     void WaveCycle(float amplitude)
@@ -94,7 +79,7 @@ public class WaveMovement : MonoBehaviour
         //+1 to change range from [-1,1] to [0,2] 
         float yPos = (Mathf.Cos(time + Mathf.PI) + 1) * -1;
 
-        transform.localPosition = new Vector2(body.position.x, yPos * amplitude + startY);
+        // transform.localPosition = new Vector2(body.position.x, yPos * amplitude + startY);
     }
 
     void nextState()
@@ -109,7 +94,6 @@ public class WaveMovement : MonoBehaviour
 
         if (targetTime <= 0f)
         {
-            // isWaveReady = !isWaveReady;
             nextState();
             targetTime = TIMER_LENGTH;
         }
