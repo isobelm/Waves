@@ -21,6 +21,9 @@ public class Player2DMovement : MonoBehaviour
     public Animator crabAnimator;
     public SpriteRenderer spriteRenderer;
     private bool isMoving;
+    bool inSea = false;
+
+    private Vector2 seaMovement = new Vector2(0f, 0f);
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class Player2DMovement : MonoBehaviour
         if (!gameStateController.GetIsGamePaused())
         {
             CheckInput();
+            HandleSea();
             HandleMovement();
         }
     }
@@ -69,7 +73,7 @@ public class Player2DMovement : MonoBehaviour
     void HandleMovement()
     {
         Vector2 movement = new Vector2(xInput, yInput) * currentSpeed;
-        body.linearVelocity = movement;
+        body.linearVelocity = movement + seaMovement;
 
         // float xSpeed = currentSpeed * xInput;
         // float ySpeed = currentSpeed * yInput;
@@ -91,6 +95,14 @@ public class Player2DMovement : MonoBehaviour
         }
     }
 
+    void HandleSea(){
+        if(inSea){
+            seaMovement = new Vector2(0f, 1f);
+        } else {
+            seaMovement = new Vector2(0f, 0f);
+        }
+    }
+
     //----------------------------------------------------------------------------
 
     void OnTriggerEnter2D(Collider2D other)
@@ -105,8 +117,10 @@ public class Player2DMovement : MonoBehaviour
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Crab");
         }
         else if (other.CompareTag("Sea"))
-        {
-            currentSpeed = SEA_SPEED;
+        {   
+            inSea = true;
+            // currentSpeed = SEA_SPEED;
+            Debug.Log("Entered Sea");
         }
         else
         {
@@ -124,7 +138,9 @@ public class Player2DMovement : MonoBehaviour
         }
         else if (other.CompareTag("Sea"))
         {
+            inSea = false;
             currentSpeed = ROCK_SPEED;
+            Debug.Log("Exited Sea");
         }
     }
 }

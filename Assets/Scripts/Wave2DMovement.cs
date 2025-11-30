@@ -18,7 +18,7 @@ public class Wave2DMovement : MonoBehaviour
 
     float startY;
 
-    float TIMER_LENGTH = 2 * Mathf.PI;
+    float TIMER_LENGTH = 3f;
     float targetTime;
     bool isWaveReady = false;
     bool isWaveAttack = false;
@@ -42,12 +42,12 @@ public class Wave2DMovement : MonoBehaviour
                 }
             case 1:
                 {
-                    WaveCycle(1);
+                    WaveCycle(2);
                     break;
                 }
             case 2:
                 {
-                    WaveCycle(3);
+                    WaveCycle(8);
                     break;
                 }
 
@@ -67,7 +67,7 @@ public class Wave2DMovement : MonoBehaviour
 
     void WaveIdle()
     {
-        Timer();
+        IdleCountdown();
         transform.localPosition = new Vector2(transform.localPosition.x, startY);
     }
 
@@ -87,7 +87,7 @@ public class Wave2DMovement : MonoBehaviour
         time = 0;
     }
 
-    void Timer()
+    void IdleCountdown()
     {
         targetTime -= Time.deltaTime;
 
