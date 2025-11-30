@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - Sand
   - Win
+  - Seagull
   layers:
   - Default
   - TransparentFX
