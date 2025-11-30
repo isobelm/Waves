@@ -98,10 +98,9 @@ public class Player2DMovement : MonoBehaviour
         {
             gameStateController.PlayerDied();
         }
-        else if (other.CompareTag("TidePool"))
+        else if (other.CompareTag("Rock"))
         {
-            currentSpeed = POOL_SPEED;
-
+            currentSpeed = ROCK_SPEED;
         }
         else if (other.CompareTag("Sea"))
         {
@@ -109,15 +108,15 @@ public class Player2DMovement : MonoBehaviour
         }
         else
         {
-            currentSpeed = ROCK_SPEED;
+            currentSpeed = POOL_SPEED;
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("TidePool"))
+        if (other.CompareTag("Rock"))
         {
-            currentSpeed = ROCK_SPEED;
+            currentSpeed = POOL_SPEED;
         }
         else if (other.CompareTag("Sea"))
         {
