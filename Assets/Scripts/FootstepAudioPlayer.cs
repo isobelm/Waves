@@ -3,7 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Player2DMovement))]
 public class FootstepAudioPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip[] sandFootsteps;
+    [SerializeField] private AudioClip[] waterFootsteps;
     [SerializeField] private AudioSource footstepAudioSource;
     [SerializeField] private float footstepSpeed = 1.25f;
 
@@ -26,9 +27,18 @@ public class FootstepAudioPlayer : MonoBehaviour
             {
                 time %= 1f;
 
-                int randomIndex = Random.Range(0, footsteps.Length);
-                AudioClip footstepAudio = footsteps[randomIndex];
-                footstepAudioSource.PlayOneShot(footstepAudio);
+                if (player2DMovement.GetIsInSea())
+                {
+                    int randomIndex = Random.Range(0, waterFootsteps.Length);
+                    AudioClip footstepAudio = waterFootsteps[randomIndex];
+                    footstepAudioSource.PlayOneShot(footstepAudio);
+                }
+                else 
+                {
+                    int randomIndex = Random.Range(0, sandFootsteps.Length);
+                    AudioClip footstepAudio = sandFootsteps[randomIndex];
+                    footstepAudioSource.PlayOneShot(footstepAudio);
+                }
             }
         }
     }
