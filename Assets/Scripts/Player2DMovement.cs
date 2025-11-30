@@ -25,6 +25,7 @@ public class Player2DMovement : MonoBehaviour
     float seaStartPosY;                                                                      
     private bool isMoving;
     private bool inSea = false;
+    public GameObject seagull;
 
     private Vector2 seaMovement = new Vector2(0f, 0f);     
 
@@ -49,7 +50,7 @@ public class Player2DMovement : MonoBehaviour
 
         START_POSITION_X = transform.localPosition.x;
         START_POSITION_Y = transform.localPosition.y;
-        
+
         body = GetComponent<Rigidbody2D>();
         gameStateController = FindFirstObjectByType<GameStateController>();
 
@@ -163,6 +164,11 @@ public class Player2DMovement : MonoBehaviour
         else if (other.CompareTag("Sea"))
         {   
             inSea = true;
+        }
+        else if (other.CompareTag("Seagull"))
+        {   
+            spriteRenderer.enabled = false;
+            // seagull.
         }
         else
         {

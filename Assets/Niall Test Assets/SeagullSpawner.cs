@@ -12,10 +12,13 @@ public class SeagullSpawner : MonoBehaviour
     private GameObject activeGameObject;
     private Player2DMovement playerMovement;
     private bool shadowHasSpawned = false;
+    public Animator animator;
+
 
     void Start()
     {
         playerMovement = GetComponent<Player2DMovement>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -100,6 +103,15 @@ public class SeagullSpawner : MonoBehaviour
         {
             Destroy(activeGameObject);
             activeGameObject = null;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {   
+            // playerMovement.spriteRenderer.enabled = false;
+            animator.SetBool("bite", true);
         }
     }
 }
