@@ -422,4 +422,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b146bf52fdbc6e5dabae663edf4af3ac, type: 3}
   - {fileID: 8300000, guid: d1ada1432775147da9644a30f921b843, type: 3}
   footstepAudioSource: {fileID: 5734613252719658463}
-  footstepSpeed: 1
+  footstepSpeed: 1.25
