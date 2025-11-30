@@ -147,7 +147,6 @@ public class Player2DMovement : MonoBehaviour
         else if (other.CompareTag("Sea"))
         {
             inSea = false;
-            currentSpeed = ROCK_SPEED;
         }
     }
 }
