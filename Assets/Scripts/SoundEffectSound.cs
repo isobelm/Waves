@@ -6,7 +6,9 @@ public class SoundEffectSound
     public enum SoundName
     {
         WIN,
-        DEAD
+        DEAD,
+        CURSOR_CANCEL,
+        CURSOR_CONFIRM
     }
 
     public SoundName name;
