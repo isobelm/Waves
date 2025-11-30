@@ -61,5 +61,8 @@ TagManager:
   - name: Seagull
     uniqueID: 2352091163
     locked: 0
+  - name: UI
+    uniqueID: 2862943619
+    locked: 0
   m_RenderingLayers:
   - Default
