@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player2DMovement : MonoBehaviour
 {
 
@@ -40,7 +41,7 @@ public class Player2DMovement : MonoBehaviour
     {
         return isOffRock || inSea;
     }
-
+    
     void Start()
     {
         sea  = GameObject.Find("Sea");
@@ -100,10 +101,12 @@ public class Player2DMovement : MonoBehaviour
         if (Mathf.Abs(xInput) > 0 || Mathf.Abs(yInput) > 0)
         {
             crabAnimator.SetBool("isMoving", true);
+            isMoving = true;
         }
         else
         {
             crabAnimator.SetBool("isMoving", false);
+            isMoving = false;
         }
     }
 
@@ -177,5 +180,20 @@ public class Player2DMovement : MonoBehaviour
         {
             inSea = false;
         }
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
+
+    public bool GetIsInSea()
+    {
+        return inSea;
     }
 }
