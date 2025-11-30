@@ -6,8 +6,8 @@ public class Player2DMovement : MonoBehaviour
 
     private Rigidbody2D body;
 
-    public float START_POSITION_X;
-    public float START_POSITION_Y;
+    private float START_POSITION_X;
+    private float START_POSITION_Y;
 
     private float xInput;
     private float yInput;
@@ -41,12 +41,15 @@ public class Player2DMovement : MonoBehaviour
     {
         return isOffRock || inSea;
     }
-    
+
     void Start()
     {
         sea  = GameObject.Find("Sea");
         seaStartPosY = sea.transform.localPosition.y;
 
+        START_POSITION_X = transform.localPosition.x;
+        START_POSITION_Y = transform.localPosition.y;
+        
         body = GetComponent<Rigidbody2D>();
         gameStateController = FindFirstObjectByType<GameStateController>();
 
@@ -133,10 +136,10 @@ public class Player2DMovement : MonoBehaviour
         {
             timeOutOfWater += Time.deltaTime;
 
-            if (timeOutOfWater >= timeBeforeSeagullDeath)
-            {
-                gameStateController.PlayerDied();
-            }
+            // if (timeOutOfWater >= timeBeforeSeagullDeath)
+            // {
+            //     gameStateController.PlayerDied();
+            // }
         }
         else {
             timeOutOfWater = 0f;
