@@ -23,9 +23,23 @@ public class Player2DMovement : MonoBehaviour
     private GameObject sea;
     float seaStartPosY;                                                                      
     private bool isMoving;
-    bool inSea = false;
+    private bool inSea = false;
 
-    private Vector2 seaMovement = new Vector2(0f, 0f);                                                      
+    private Vector2 seaMovement = new Vector2(0f, 0f);     
+
+    public float timeBeforeSeagullDeath = 5f;
+    private float timeOutOfWater = 0f;
+    private bool isOffRock = true;
+    
+    public float GetTimeOutOfWater()
+    {
+        return timeOutOfWater;
+    }
+
+    public bool IsInWater()
+    {
+        return isOffRock || inSea;
+    }
 
     void Start()
     {
@@ -46,13 +60,11 @@ public class Player2DMovement : MonoBehaviour
         {
             CheckInput();
             HandleSea();
+            HandleSeagull();
             HandleMovement();
         }
-    }
 
-    void FixedUpdate()
-    {
-
+        Debug.Log("timeOutOfWater: " + timeOutOfWater);
     }
 
     //----------------------------------------------------------------------------
@@ -113,6 +125,21 @@ public class Player2DMovement : MonoBehaviour
         }
     }
 
+    void HandleSeagull(){
+        if (!IsInWater())
+        {
+            timeOutOfWater += Time.deltaTime;
+
+            if (timeOutOfWater >= timeBeforeSeagullDeath)
+            {
+                gameStateController.PlayerDied();
+            }
+        }
+        else {
+            timeOutOfWater = 0f;
+        }
+    }
+
     //----------------------------------------------------------------------------
 
     void OnTriggerEnter2D(Collider2D other)
@@ -123,6 +150,7 @@ public class Player2DMovement : MonoBehaviour
         }
         else if (other.CompareTag("Rock"))
         {
+            isOffRock = false;
             currentSpeed = ROCK_SPEED;
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Crab");
         }
@@ -141,6 +169,7 @@ public class Player2DMovement : MonoBehaviour
     {
         if (other.CompareTag("Rock"))
         {
+            isOffRock = true;
             currentSpeed = POOL_SPEED;
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Bottom of pool");
         }

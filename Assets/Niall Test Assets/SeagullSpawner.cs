@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(Player2DMovement))]
 public class SeagullSpawner : MonoBehaviour
 {
     public GameObject seagullPrefab;
@@ -10,12 +10,12 @@ public class SeagullSpawner : MonoBehaviour
     public float movementSpeed = 10f;
 
     private GameObject activeGameObject;
-    private PlayerMovement playerMovement;
+    private Player2DMovement playerMovement;
     private bool shadowHasSpawned = false;
 
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<Player2DMovement>();
     }
 
     void Update()
