@@ -6,8 +6,8 @@ public class Player2DMovement : MonoBehaviour
 
     private Rigidbody2D body;
 
-    public float START_POSITION_X;
-    public float START_POSITION_Y;
+    private float START_POSITION_X;
+    private float START_POSITION_Y;
 
     private float xInput;
     private float yInput;
@@ -24,15 +24,32 @@ public class Player2DMovement : MonoBehaviour
     private GameObject sea;
     float seaStartPosY;                                                                      
     private bool isMoving;
-    bool inSea = false;
+    private bool inSea = false;
 
-    private Vector2 seaMovement = new(0f, 0f);                                                      
+    private Vector2 seaMovement = new Vector2(0f, 0f);     
+
+    public float timeBeforeSeagullDeath = 5f;
+    private float timeOutOfWater = 0f;
+    private bool isOffRock = true;
+    
+    public float GetTimeOutOfWater()
+    {
+        return timeOutOfWater;
+    }
+
+    public bool IsInWater()
+    {
+        return isOffRock || inSea;
+    }
 
     void Start()
     {
         sea  = GameObject.Find("Sea");
         seaStartPosY = sea.transform.localPosition.y;
 
+        START_POSITION_X = transform.localPosition.x;
+        START_POSITION_Y = transform.localPosition.y;
+        
         body = GetComponent<Rigidbody2D>();
         gameStateController = FindFirstObjectByType<GameStateController>();
 
@@ -47,13 +64,11 @@ public class Player2DMovement : MonoBehaviour
         {
             CheckInput();
             HandleSea();
+            HandleSeagull();
             HandleMovement();
         }
-    }
 
-    void FixedUpdate()
-    {
-
+        Debug.Log("timeOutOfWater: " + timeOutOfWater);
     }
 
     //----------------------------------------------------------------------------
@@ -116,6 +131,21 @@ public class Player2DMovement : MonoBehaviour
         }
     }
 
+    void HandleSeagull(){
+        if (!IsInWater())
+        {
+            timeOutOfWater += Time.deltaTime;
+
+            // if (timeOutOfWater >= timeBeforeSeagullDeath)
+            // {
+            //     gameStateController.PlayerDied();
+            // }
+        }
+        else {
+            timeOutOfWater = 0f;
+        }
+    }
+
     //----------------------------------------------------------------------------
 
     void OnTriggerEnter2D(Collider2D other)
@@ -126,6 +156,7 @@ public class Player2DMovement : MonoBehaviour
         }
         else if (other.CompareTag("Rock"))
         {
+            isOffRock = false;
             currentSpeed = ROCK_SPEED;
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Crab");
         }
@@ -144,6 +175,7 @@ public class Player2DMovement : MonoBehaviour
     {
         if (other.CompareTag("Rock"))
         {
+            isOffRock = true;
             currentSpeed = POOL_SPEED;
             spriteRenderer.sortingLayerID = SortingLayer.NameToID("Bottom of pool");
         }
