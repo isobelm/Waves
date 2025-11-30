@@ -1,14 +1,24 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [SerializeField] private Sound[] musicSounds, audioSounds;
+    public enum SceneName
+    {
+        MAIN_MENU,
+        LEVEL_ONE,
+        WIN,
+        DEAD
+    }
+
+    [SerializeField] private MusicSound[] musicSounds;
+    [SerializeField] private SoundEffectSound[] soundEffectSounds;
     [SerializeField] private AudioSource musicAudioSource, soundEffectSource;
+    [SerializeField] private SceneName sceneName;
+
     
     private void Awake()
     {
@@ -23,25 +33,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(Sound.AudioName name)
+    public void PlayMusic(MusicSound.MusicName name)
     {
-        Sound sound = Array.Find(musicSounds, x => x.name == name);
+        MusicSound sound = Array.Find(musicSounds, x => x.name == name);
 
+        musicAudioSource.Stop();
         musicAudioSource.loop = true;
         musicAudioSource.clip = sound.audioClip;
         musicAudioSource.Play();
     }
 
+    public void PlaySound(SoundEffectSound.SoundName name)
+    {
+        SoundEffectSound sound = Array.Find(soundEffectSounds, x => x.name == name);
+
+        soundEffectSource.PlayOneShot(sound.audioClip);
+    }
+
+    public void StopMusic()
+    {
+        musicAudioSource.Stop();
+    }
+
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == "MainMenu")
-        {
-            PlayMusic(Sound.AudioName.MAIN_MENU_MUSIC);
-        }
-        else
-        {
-            PlayMusic(Sound.AudioName.LEVEL_ONE_MUSIC);
-        }
+        PlayMusic(MusicSound.MusicName.MAIN_MENU_MUSIC);
     }
 }

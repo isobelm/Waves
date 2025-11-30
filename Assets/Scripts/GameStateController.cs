@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +10,7 @@ public class GameStateController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        AudioManager.instance.PlayMusic(MusicSound.MusicName.LEVEL_ONE_MUSIC);
     }
 
     public void ExitGame()
@@ -55,10 +55,14 @@ public class GameStateController : MonoBehaviour
     public void PlayerDied()
     {
         SceneManager.LoadScene(2);
+        AudioManager.instance.StopMusic();
+        AudioManager.instance.PlaySound(SoundEffectSound.SoundName.DEAD);
     }
 
     public void PlayerWon()
     {
         SceneManager.LoadScene(3);
+        AudioManager.instance.StopMusic();
+        AudioManager.instance.PlaySound(SoundEffectSound.SoundName.WIN);
     }
 }
