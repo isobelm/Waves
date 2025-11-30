@@ -11,6 +11,7 @@ public class GameStateController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        AudioManager.instance.PlayMusic(Sound.AudioName.LEVEL_ONE_MUSIC);
     }
 
     public void ExitGame()
