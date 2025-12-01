@@ -14,6 +14,8 @@ public class SeagullSpawner : MonoBehaviour
     private bool shadowHasSpawned = false;
     public Animator animator;
 
+    private float seagullY = 0;
+
 
     void Start()
     {
@@ -24,9 +26,10 @@ public class SeagullSpawner : MonoBehaviour
     void Update()
     {
         float timeRemaining = playerMovement.timeBeforeSeagullDeath - playerMovement.GetTimeOutOfWater();
+        // Debug.Log("Time Remaining: " + timeRemaining);
 
         // Phase 1: Spawn shadow when time remaining between 4s and 2s (second threshold)
-        if (timeRemaining <= seagullStartTime && timeRemaining > shadowStartTime && !playerMovement.IsInWater())
+        if (timeRemaining <= seagullStartTime && timeRemaining > shadowStartTime )
         {
             if (!shadowHasSpawned)
             {
@@ -34,6 +37,7 @@ public class SeagullSpawner : MonoBehaviour
                 if (activeGameObject != null)
                 {
                     Destroy(activeGameObject);
+                    Debug.Log("Destroy Seagull 1");
                 }
                 SpawnSeagullShadow();
                 shadowHasSpawned = true;
@@ -44,16 +48,16 @@ public class SeagullSpawner : MonoBehaviour
             }
         }
         // Phase 2: Spawn real seagull when time remaining <= shadowStartTime (2s, first threshold)
-        else if (timeRemaining <= shadowStartTime && timeRemaining > 0 && !playerMovement.IsInWater())
+        else if (timeRemaining <= shadowStartTime && timeRemaining > 0 )
         {
             if (activeGameObject == null || shadowHasSpawned == true)
             {
                 shadowHasSpawned = false;
-                SpawnSeagull();
+                // SpawnSeagull();
             }
             else
             {
-                MoveSeagullCloser();
+                // MoveSeagullDown();
             }
         }
         else
@@ -62,6 +66,8 @@ public class SeagullSpawner : MonoBehaviour
             if (activeGameObject != null)
             {
                 Destroy(activeGameObject);
+                Debug.Log("Destroy Seagull 2");
+                
                 activeGameObject = null;
             }
             shadowHasSpawned = false;
@@ -73,6 +79,7 @@ public class SeagullSpawner : MonoBehaviour
         // Spawn at top of screen above player, no rotation
         Vector3 spawnPos = transform.position + new Vector3(0f, 10f, 0f);
         activeGameObject = Instantiate(seagullPrefab, spawnPos, Quaternion.Euler(0f, 0f, 0f));
+        Debug.Log("Create Seagull 1");
     }
 
     void SpawnSeagullShadow()
@@ -80,17 +87,19 @@ public class SeagullSpawner : MonoBehaviour
         // Spawn at bottom of screen below player, rotated 180 degrees
         Vector3 spawnPos = transform.position + new Vector3(0f, -10f, 0f);
         activeGameObject = Instantiate(seagullShadowPrefab, spawnPos, Quaternion.Euler(0f, 0f, 180f));
+        Debug.Log("Create Seagull 2 (Shadow)");
     }
 
-    void MoveSeagullCloser()
+    void MoveSeagullDown()
     {
-        // Move seagull down from top to player position
-        Vector3 targetPos = transform.position;
-        activeGameObject.transform.position = Vector3.MoveTowards(
-            activeGameObject.transform.position,
-            targetPos,
-            movementSpeed * Time.deltaTime
-        );
+        activeGameObject.transform.position += Vector3.down * movementSpeed * Time.deltaTime;
+        // Destroy shadow once it goes low enough off screen
+        if (activeGameObject.transform.position.y < transform.position.y - 20f)
+        {
+            Destroy(activeGameObject);
+            Debug.Log("Destroy Seagull 3");
+            activeGameObject = null;
+        }
     }
 
     void MoveSeagullShadowUp()
@@ -102,6 +111,7 @@ public class SeagullSpawner : MonoBehaviour
         if (activeGameObject.transform.position.y > transform.position.y + 20f)
         {
             Destroy(activeGameObject);
+            Debug.Log("Destroy Seagull 4");
             activeGameObject = null;
         }
     }

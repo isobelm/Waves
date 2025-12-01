@@ -69,7 +69,7 @@ public class Player2DMovement : MonoBehaviour
             HandleMovement();
         }
 
-        Debug.Log("timeOutOfWater: " + timeOutOfWater);
+        // Debug.Log("timeOutOfWater: " + timeOutOfWater);
     }
 
     //----------------------------------------------------------------------------
